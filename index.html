@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Khaeoz_Vault</title>
+  <link rel="icon" type="image/x-icon" href="Khaeoz.png">
+  <style>
+    body {
+      font-family: "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+
+    /* 1. 悬停文本的基础样式 */
+        .tooltip-text {
+            position: relative;          /* 用于相对定位提示框 */
+            display: inline-block;
+            color: #0066cc;              /* 文字颜色 */
+            cursor: pointer;             /* 鼠标变为手势 */
+        }
+        .tooltip-text:hover {
+          text-decoration: underline;
+        }
+
+        /* 2. 隐藏的提示文本框（默认不可见） */
+        .tooltip-text .tooltip-box {
+            visibility: hidden;
+            opacity: 0;
+            width: 800px;                 /* 提示框宽度 */
+            background-color: #333333;    /* 背景深色 */
+            color: #ffffff;               /* 文字浅色 */
+            text-align: left;
+            padding: 8px 12px;
+            border-radius: 6px;           /* 圆角 */
+            font-size: 13px;
+            
+            /* 绝对定位在文本上方 */
+            position: absolute;
+            z-index: 10;
+            bottom: 125%;                 /* 显示在文本上方 */
+            left: 50%;
+            transform: translateX(-50%);  /* 居中对齐 */
+
+            /* 渐变过渡动画效果 */
+            transition: opacity 0.3s, visibility 0.3s;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); /* 阴影 */
+        }
+
+        /* 3. 提示框底部的小三角指示器 */
+        .tooltip-text .tooltip-box::after {
+            content: "";
+            position: absolute;
+            top: 100%;                    /* 位于提示框底部 */
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #333333 transparent transparent transparent;
+        }
+
+        /* 4. 鼠标悬停时显示提示框 */
+        .tooltip-text:hover .tooltip-box {
+            visibility: visible;
+            opacity: 1;
+        }
+
+    header {
+      background: #2c3e50;
+      padding: 15px 20px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.5em;
+    }
+
+    header img {
+      width: 20%;          /* responsive percentage */
+      max-width: 200px;    /* upper limit */
+      min-width: 100px;    /* lower limit */
+      height: auto;        /* keep aspect ratio */
+      border-radius: 50%;  /* round avatar */
+      margin-top: 10px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+        .sidebar-container {
+            position: fixed;
+            top: 25%;
+            bottom: 20%; /* 相当于 height: 40vh，即上下 30% ~ 70% */
+            left: 84%;
+            width: 12%; 
+            
+            background-color: #fafafa;
+            border: 1px solid #e8e8e8;
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            padding: 20px 15px;
+            
+            overflow-y: auto; /* 允许内部索引内容滚动 */
+            z-index: 10;     /* 保证处于表层 */
+        }
+
+        .sidebar-container h3 {
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: #444;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #0066cc;
+        }
+
+        .sidebar-container ul {
+            list-style: none;
+        }
+
+        /* 索引基础链接通用样式 */
+        .sidebar-container a {
+            color: #555;
+            text-decoration: none;
+            display: block;
+            border-radius: 4px;
+            transition: all 0.2s;
+            line-height: 1.4;
+        }
+
+        .sidebar-container a:hover {
+            background-color: #e6f7ff;
+            color: #0066cc;
+        }
+    h2 {
+      color: #2c3e50;
+      margin-top: 40px;
+    }
+    .books {
+      margin-top: 20px;
+    }
+    .novel {
+      background: #fff;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .novel a {
+      color: #3498db;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .novel a:hover {
+      text-decoration: underline;
+    }
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      background: #2c3e50;
+      color: white;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="profile">
+      <!-- Replace profile.jpg with your own image or an online link -->
+      
+      <h1><img src="Khaeoz.png" alt="Kh">Khaeoz_Theory</h1>
+    </div>
+    <nav>
+      <a href="#about">啊咧咧？</a>
+      <a href="#books">搜刮</a>
+      <a href="#contact">尝试踢门</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <section id="about">
+      <h2>哇！快看，这里是哪儿？</h2>
+      <p>嘶——似乎是书库啊……等等，你是谁？</p>
+      <p > 
+        <span class="tooltip-text" style = "color: #a5000e">
+          ==锟斤拷迎锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷JCOB锟侥诧拷锟斤拷锟揭★拷锟斤拷锟斤拷锟斤拷锟介，锟斤拷锟介，锟斤拷锟介。锟斤拷锟斤拷停锟斤拷锟斤拷锟节硷拷锟节ｏ拷锟斤拷锟斤拷锟斤拷锟斤拷锟解翻锟斤拷锟斤拷锟斤拷锟斤拷榧拷锟�==
+        <span class="tooltip-box">看来是编码出问题了。你连忙翻开了对方体内的文件，用正确的编码形式打了开来。<br>
+          原本的文本是这样的：“欢迎来到混沌理论JCOB的藏书室。这里有书，和书，和书。在您停留的期间内，您可以随意翻阅这里的书籍。”<br>
+          做这个的人到底有多闲啊？</span>
+        </span>
+      </p>
+        <!-- 欢迎来到混沌理论JCOB的藏书室。这里有书, 和书, 和书. 在您停留的期间内, 您可以随意翻阅这里的书籍. -->
+    </section>
+
+    <aside class="sidebar-container">
+      <h3>更新公告</h3>
+      <p>20261011 - 《当你迷茫》：修改了发展·十一的部分文本。短期内将会停更，下一次更新将会更新到发展的结局。</p>
+      <p>20261009 - 《当你迷茫》：更新了发展·十二、发展·十三。</p>
+    </aside>
+
+    <section id="books">
+      <h2>书库</h2>
+      <p>你翻了翻书架。</p>
+      <p>你获得了……几本小说？</p>
+      <div class="books">
+        <div class="novel">
+          <h3>《当你迷茫时，请在世界的尽头唱响这首歌》</h3>
+          <p>你得到了一卷残卷——不对，上面的字还在不断的变多。难道作者还在写吗？</p>
+          <p>你从封面上隐约看到了一行字：不定期持续更新中。</p>
+          <p>……所以为什么这样子的书已经有后记了？</p>
+          <a href="preq_0.html" target="_blank">点击查阅→</a>
+        </div>
+
+        <div class="novel">
+          <h3>待命名</h3>
+          <p>你得到了好几卷残卷——不对，上面的字还在不断的变多，而且每次变化的位置都还在变。难道作者还在写吗？</p>
+          <p>你勉强从好像是封面的页面上隐约看到了一行字：不定期不持续更新中，不按顺序更新，梦到哪儿写到哪儿。</p>
+          <p>所以说……作者到底在干啥？为啥要跳着写？</p>
+          <a href="https://www.bilibili.com/video/BV1UT42167xb/" target="_blank">点击查阅→</a>
+        </div>
+
+       
+
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2><span class="tooltip-text" style = "color: #a5000e">
+        ==锟斤拷要锟斤拷系锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷去锟斤拷锟斤拷锟斤拷锟铰凤拷锟斤拷锟斤拷==
+        <span class="tooltip-box" style = "width:300px"><p style = "font-weight: normal">
+          你又一次用正确的编码打开了对话文本。<br>
+          “需要联系书库的主人吗？您可以去试试以下方法。”<br>
+          说实话，玩过一次的笑话就不好玩了。</p>
+        </span>
+      </span></h2>
+
+      <p>感觉不会有有用……？</p>
+      <p>邮件：mikecraft666.xue@gmail.com</p>
+      <p>全球最大的同性交友网站：<a href="https://github.com/Epors-Usr" target="_blank">https://github.com/Epors-Usr</a></p>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Epors-Usr | Powered by GitHub Pages</p>
+  </footer>
+</body>
+</html>
